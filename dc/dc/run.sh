@@ -68,6 +68,29 @@ show_loading() {
     echo -e "${GREEN}[+] Done!${NC}"
 }
 
+# --- 1PANEL INSTALLATION FUNCTION ---
+install_1panel() {
+    echo -e "${YELLOW}[>] Starting 1Panel Installation...${NC}"
+    echo -e "${CYAN}[*] Downloading installation script...${NC}"
+    
+    # Download and execute 1Panel installation script
+    if curl -sSL https://resource.1panel.pro/quick_start.sh -o quick_start.sh; then
+        echo -e "${GREEN}[+] Script downloaded successfully${NC}"
+        echo -e "${CYAN}[*] Executing installation...${NC}"
+        
+        # Make script executable and run
+        chmod +x quick_start.sh
+        if bash quick_start.sh & then
+            local pid=$!
+            show_loading $pid "Installing 1Panel"
+        else
+            echo -e "${RED}[!] Failed to execute 1Panel installation${NC}"
+        fi
+    else
+        echo -e "${RED}[!] Failed to download 1Panel installation script${NC}"
+    fi
+}
+
 # --- PANEL MENU ---
 panel_menu() {
     while true; do
@@ -89,7 +112,19 @@ panel_menu() {
         read -p "" pchoice
 
         case $pchoice in
-            1) execute_command "1 Panel" "1panel.sh" ;;
+            1) 
+                echo -e "${YELLOW}[>] Installing 1Panel...${NC}"
+                echo -e "${CYAN}[*] Command: curl -sSL https://resource.1panel.pro/quick_start.sh -o quick_start.sh && bash quick_start.sh${NC}"
+                echo -e "${YELLOW}[!] This will install 1Panel on your system. Continue? [y/N]:${NC}"
+                echo -ne "${CYAN}> ${NC}"
+                read -p "" confirm
+                if [[ $confirm == "y" || $confirm == "Y" ]]; then
+                    install_1panel
+                else
+                    echo -e "${RED}[*] Installation cancelled${NC}"
+                fi
+                pause
+                ;;
             2) execute_command "Pterodactyl" "pterodactyl.sh" ;;
             3) execute_command "JackTera v3" "jacktera_v3.sh" ;;
             4) execute_command "JackTera v4" "jacktera_v4.sh" ;;
