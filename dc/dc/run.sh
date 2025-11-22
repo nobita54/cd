@@ -67,6 +67,14 @@ show_loading() {
     echo -e "${GREEN}[+] Done!${NC}"
 }
 
+# --- BETTER READ FUNCTION ---
+read_input() {
+    local prompt="$1"
+    echo -ne "${CYAN}> ${NC}"
+    read -p "$prompt" input
+    echo "$input"
+}
+
 # --- 1PANEL INSTALLATION FUNCTION ---
 install_1panel() {
     echo -e "${YELLOW}[>] Starting 1Panel Installation...${NC}"
@@ -164,16 +172,19 @@ panel_menu() {
         echo -e "${BLUE}└────────────────────────────────────────────────────────────────────────────┘${NC}"
         echo
         echo -e "${DIM}Select an option [1-10]:${NC} "
-        echo -ne "${CYAN}> ${NC}"
-        read -p "" pchoice
-
+        
+        # Use the new read_input function
+        pchoice=$(read_input "")
+        
         case $pchoice in
             1) 
                 echo -e "${YELLOW}[>] Installing 1Panel...${NC}"
                 echo -e "${CYAN}[*] Command: curl -sSL https://resource.1panel.pro/quick_start.sh -o quick_start.sh && bash quick_start.sh${NC}"
                 echo -e "${YELLOW}[!] This will install 1Panel on your system. Continue? [y/N]:${NC}"
-                echo -ne "${CYAN}> ${NC}"
-                read -p "" confirm
+                
+                # Use the new read_input function for confirmation
+                confirm=$(read_input "")
+                
                 if [[ $confirm == "y" || $confirm == "Y" ]]; then
                     install_1panel
                 else
@@ -211,9 +222,10 @@ tools_menu() {
         echo -e "${GREEN}└────────────────────────────────────────────────────────────────────────────┘${NC}"
         echo
         echo -e "${DIM}Select an option [1-8]:${NC} "
-        echo -ne "${CYAN}> ${NC}"
-        read -p "" tchoice
-
+        
+        # Use the new read_input function
+        tchoice=$(read_input "")
+        
         case $tchoice in
             1) execute_command "Root Access" "root.sh" ;;
             2) execute_command "Tailscale VPN" "tailscale.sh" ;;
@@ -244,9 +256,10 @@ theme_menu() {
         echo -e "${PURPLE}└────────────────────────────────────────────────────────────────────────────┘${NC}"
         echo
         echo -e "${DIM}Select an option [1-4]:${NC} "
-        echo -ne "${CYAN}> ${NC}"
-        read -p "" thchoice
-
+        
+        # Use the new read_input function
+        thchoice=$(read_input "")
+        
         case $thchoice in
             1) execute_command "Blueprint Theme" "blueprint.sh" ;;
             2) execute_command "Change Theme" "change_theme.sh" ;;
@@ -276,9 +289,10 @@ uninstall_menu() {
         echo -e "${RED}└────────────────────────────────────────────────────────────────────────────┘${NC}"
         echo
         echo -e "${DIM}Select an option [1-13]:${NC} "
-        echo -ne "${CYAN}> ${NC}"
-        read -p "" uchoice
-
+        
+        # Use the new read_input function
+        uchoice=$(read_input "")
+        
         case $uchoice in
             1) execute_command "Uninstall Pterodactyl" "uninstall_ptero.sh" ;;
             2) execute_command "Uninstall JackTera v3" "uninstall_jacktera_v3.sh" ;;
@@ -327,9 +341,10 @@ main_menu() {
         echo -e "${CYAN}└────────────────────────────────────────────────────────────────────────────┘${NC}"
         echo
         echo -e "${DIM}Choose your action [1-6]:${NC} "
-        echo -ne "${CYAN}> ${NC}"
-        read -p "" choice
-
+        
+        # Use the new read_input function
+        choice=$(read_input "")
+        
         case $choice in
             1) panel_menu ;;
             2) execute_command "Wings Installation" "wings.sh" ;;
