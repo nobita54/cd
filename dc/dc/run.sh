@@ -23,7 +23,7 @@ BLINK='\033[5m'
 
 pause() { 
     echo -e "${CYAN}"
-    read -p "➤ Press Enter to continue..." fackEnterKey
+    read -p "> Press Enter to continue..." fackEnterKey
     echo -e "${NC}"
 }
 
@@ -42,7 +42,7 @@ banner() {
     echo -e "${BLUE}"
     echo -e "║                                                                              ║"
     echo -e "╠══════════════════════════════════════════════════════════════════════════════╣"
-    echo -e "║                     🚀 Multi-Panel Control Center v2.0                      ║"
+    echo -e "║                     [>] Multi-Panel Control Center v2.0                     ║"
     echo -e "╚══════════════════════════════════════════════════════════════════════════════╝"
     echo -e "${NC}"
     echo -e "${DIM}                             Keandr Coding Hub${NC}"
@@ -65,7 +65,7 @@ show_loading() {
         printf "\b\b\b\b\b\b"
     done
     printf "    \b\b\b\b"
-    echo -e "${GREEN}✅ Done!${NC}"
+    echo -e "${GREEN}[+] Done!${NC}"
 }
 
 # --- PANEL MENU ---
@@ -73,19 +73,19 @@ panel_menu() {
     while true; do
         banner
         echo -e "${BLUE}┌────────────────────────────────────────────────────────────────────────────┐${NC}"
-        echo -e "${BLUE}│                        ${WHITE}📦 ${BOLD}PANEL MANAGEMENT${NC}${BLUE}                         │${NC}"
+        echo -e "${BLUE}│                        ${WHITE}[#] ${BOLD}PANEL MANAGEMENT${NC}${BLUE}                         │${NC}"
         echo -e "${BLUE}├────────────────────────────────────────────────────────────────────────────┤${NC}"
         echo -e "${BLUE}│${NC}                                                                        ${BLUE}│${NC}"
-        echo -e "${BLUE}│${NC}  ${GREEN}1)${NC} 🖥️  1 Panel                 ${GREEN}6)${NC} 📊 Dashboard v4           ${BLUE}│${NC}"
-        echo -e "${BLUE}│${NC}  ${GREEN}2)${NC} 🦅 Pterodactyl              ${GREEN}7)${NC} 💳 Payment Gateway        ${BLUE}│${NC}"
-        echo -e "${BLUE}│${NC}  ${GREEN}3)${NC} ⚡ JackTera v3              ${GREEN}8)${NC} 🎛️  CtrlPanel              ${BLUE}│${NC}"
-        echo -e "${BLUE}│${NC}  ${GREEN}4)${NC} 🚀 JackTera v4              ${GREEN}9)${NC} 🌐 CPanel                 ${BLUE}│${NC}"
-        echo -e "${BLUE}│${NC}  ${GREEN}5)${NC} 📈 Dashboard v3             ${GREEN}10)${NC} 🔙 Back to Main Menu     ${BLUE}│${NC}"
+        echo -e "${BLUE}│${NC}  ${GREEN}1)${NC} [*] 1 Panel                   ${GREEN}6)${NC} [@] Dashboard v4          ${BLUE}│${NC}"
+        echo -e "${BLUE}│${NC}  ${GREEN}2)${NC} [W] Pterodactyl               ${GREEN}7)${NC} [$] Payment Gateway       ${BLUE}│${NC}"
+        echo -e "${BLUE}│${NC}  ${GREEN}3)${NC} [~] JackTera v3               ${GREEN}8)${NC} [&] CtrlPanel             ${BLUE}│${NC}"
+        echo -e "${BLUE}│${NC}  ${GREEN}4)${NC} [~] JackTera v4               ${GREEN}9)${NC} [@] CPanel                ${BLUE}│${NC}"
+        echo -e "${BLUE}│${NC}  ${GREEN}5)${NC} [@] Dashboard v3              ${GREEN}10)${NC} [<] Back to Main Menu    ${BLUE}│${NC}"
         echo -e "${BLUE}│${NC}                                                                        ${BLUE}│${NC}"
         echo -e "${BLUE}└────────────────────────────────────────────────────────────────────────────┘${NC}"
         echo
         echo -e "${DIM}Select an option [1-10]:${NC} "
-        echo -ne "${CYAN}➤ ${NC}"
+        echo -ne "${CYAN}> ${NC}"
         read -p "" pchoice
 
         case $pchoice in
@@ -99,7 +99,7 @@ panel_menu() {
             8) execute_command "CtrlPanel" "ctrlpanel.sh" ;;
             9) execute_command "CPanel" "cpanel.sh" ;;
             10) break ;;
-            *) echo -e "${RED}❌ Invalid choice! Please select between 1-10${NC}"; pause ;;
+            *) echo -e "${RED}[!] Invalid choice! Please select between 1-10${NC}"; pause ;;
         esac
     done
 }
@@ -109,18 +109,18 @@ tools_menu() {
     while true; do
         banner
         echo -e "${GREEN}┌────────────────────────────────────────────────────────────────────────────┐${NC}"
-        echo -e "${GREEN}│                        ${WHITE}🛠️ ${BOLD}SYSTEM TOOLS${NC}${GREEN}                             │${NC}"
+        echo -e "${GREEN}│                        ${WHITE}[#] ${BOLD}SYSTEM TOOLS${NC}${GREEN}                             │${NC}"
         echo -e "${GREEN}├────────────────────────────────────────────────────────────────────────────┤${NC}"
         echo -e "${GREEN}│${NC}                                                                        ${GREEN}│${NC}"
-        echo -e "${GREEN}│${NC}  ${YELLOW}1)${NC} 🔐 Root Access              ${YELLOW}5)${NC} 🌍 IPv4 Configuration     ${GREEN}│${NC}"
-        echo -e "${GREEN}│${NC}  ${YELLOW}2)${NC} 🔗 Tailscale VPN            ${YELLOW}6)${NC} 🔄 Port Forwarding        ${GREEN}│${NC}"
-        echo -e "${GREEN}│${NC}  ${YELLOW}3)${NC} ☁️  Cloudflare DNS           ${YELLOW}7)${NC} 🖥️  RDP Setup              ${GREEN}│${NC}"
-        echo -e "${GREEN}│${NC}  ${YELLOW}4)${NC} 📊 System Information       ${YELLOW}8)${NC} 🔙 Back to Main Menu     ${GREEN}│${NC}"
+        echo -e "${GREEN}│${NC}  ${YELLOW}1)${NC} [#] Root Access                ${YELLOW}5)${NC} [@] IPv4 Configuration    ${GREEN}│${NC}"
+        echo -e "${GREEN}│${NC}  ${YELLOW}2)${NC} [~] Tailscale VPN              ${YELLOW}6)${NC} [>] Port Forwarding       ${GREEN}│${NC}"
+        echo -e "${GREEN}│${NC}  ${YELLOW}3)${NC} [*] Cloudflare DNS             ${YELLOW}7)${NC} [X] RDP Setup             ${GREEN}│${NC}"
+        echo -e "${GREEN}│${NC}  ${YELLOW}4)${NC} [i] System Information         ${YELLOW}8)${NC} [<] Back to Main Menu     ${GREEN}│${NC}"
         echo -e "${GREEN}│${NC}                                                                        ${GREEN}│${NC}"
         echo -e "${GREEN}└────────────────────────────────────────────────────────────────────────────┘${NC}"
         echo
         echo -e "${DIM}Select an option [1-8]:${NC} "
-        echo -ne "${CYAN}➤ ${NC}"
+        echo -ne "${CYAN}> ${NC}"
         read -p "" tchoice
 
         case $tchoice in
@@ -132,7 +132,7 @@ tools_menu() {
             6) execute_command "Port Forwarding" "portforward.sh" ;;
             7) execute_command "RDP Setup" "rdp.sh" ;;
             8) break ;;
-            *) echo -e "${RED}❌ Invalid choice! Please select between 1-8${NC}"; pause ;;
+            *) echo -e "${RED}[!] Invalid choice! Please select between 1-8${NC}"; pause ;;
         esac
     done
 }
@@ -142,18 +142,18 @@ theme_menu() {
     while true; do
         banner
         echo -e "${PURPLE}┌────────────────────────────────────────────────────────────────────────────┐${NC}"
-        echo -e "${PURPLE}│                        ${WHITE}🎨 ${BOLD}THEME CUSTOMIZATION${NC}${PURPLE}                     │${NC}"
+        echo -e "${PURPLE}│                        ${WHITE}[#] ${BOLD}THEME CUSTOMIZATION${NC}${PURPLE}                     │${NC}"
         echo -e "${PURPLE}├────────────────────────────────────────────────────────────────────────────┤${NC}"
         echo -e "${PURPLE}│${NC}                                                                        ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC}  ${ORANGE}1)${NC} 🎨 Blueprint Theme                                   ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC}  ${ORANGE}2)${NC} 🔄 Change Theme                                      ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC}  ${ORANGE}3)${NC} 🗑️  Uninstall Theme                                  ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC}  ${ORANGE}4)${NC} 🔙 Back to Main Menu                                 ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC}  ${ORANGE}1)${NC} [*] Blueprint Theme                                 ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC}  ${ORANGE}2)${NC} [>] Change Theme                                    ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC}  ${ORANGE}3)${NC} [X] Uninstall Theme                                 ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC}  ${ORANGE}4)${NC} [<] Back to Main Menu                               ${PURPLE}│${NC}"
         echo -e "${PURPLE}│${NC}                                                                        ${PURPLE}│${NC}"
         echo -e "${PURPLE}└────────────────────────────────────────────────────────────────────────────┘${NC}"
         echo
         echo -e "${DIM}Select an option [1-4]:${NC} "
-        echo -ne "${CYAN}➤ ${NC}"
+        echo -ne "${CYAN}> ${NC}"
         read -p "" thchoice
 
         case $thchoice in
@@ -161,7 +161,7 @@ theme_menu() {
             2) execute_command "Change Theme" "change_theme.sh" ;;
             3) execute_command "Uninstall Theme" "theme_uninstall.sh" ;;
             4) break ;;
-            *) echo -e "${RED}❌ Invalid choice! Please select between 1-4${NC}"; pause ;;
+            *) echo -e "${RED}[!] Invalid choice! Please select between 1-4${NC}"; pause ;;
         esac
     done
 }
@@ -171,21 +171,21 @@ uninstall_menu() {
     while true; do
         banner
         echo -e "${RED}┌────────────────────────────────────────────────────────────────────────────┐${NC}"
-        echo -e "${RED}│                      ${WHITE}🗑️ ${BOLD}UNINSTALL MANAGER${NC}${RED}                         │${NC}"
+        echo -e "${RED}│                      ${WHITE}[#] ${BOLD}UNINSTALL MANAGER${NC}${RED}                         │${NC}"
         echo -e "${RED}├────────────────────────────────────────────────────────────────────────────┤${NC}"
         echo -e "${RED}│${NC}                                                                        ${RED}│${NC}"
-        echo -e "${RED}│${NC}  ${YELLOW}1)${NC} 🦅 Pterodactyl              ${YELLOW}8)${NC} 🌐 CPanel                 ${RED}│${NC}"
-        echo -e "${RED}│${NC}  ${YELLOW}2)${NC} ⚡ JackTera v3              ${YELLOW}9)${NC} 🔗 Tailscale              ${RED}│${NC}"
-        echo -e "${RED}│${NC}  ${YELLOW}3)${NC} 🚀 JackTera v4              ${YELLOW}10)${NC} ☁️  Cloudflare            ${RED}│${NC}"
-        echo -e "${RED}│${NC}  ${YELLOW}4)${NC} 📈 Dashboard v3             ${YELLOW}11)${NC} 🌍 IPv4                  ${RED}│${NC}"
-        echo -e "${RED}│${NC}  ${YELLOW}5)${NC} 📊 Dashboard v4             ${YELLOW}12)${NC} 🔄 Port Forward          ${RED}│${NC}"
-        echo -e "${RED}│${NC}  ${YELLOW}6)${NC} 💳 Payment                  ${YELLOW}13)${NC} 🔙 Back to Main Menu     ${RED}│${NC}"
-        echo -e "${RED}│${NC}  ${YELLOW}7)${NC} 🎛️  CtrlPanel                                        ${RED}│${NC}"
+        echo -e "${RED}│${NC}  ${YELLOW}1)${NC} [W] Pterodactyl               ${YELLOW}8)${NC} [@] CPanel                ${RED}│${NC}"
+        echo -e "${RED}│${NC}  ${YELLOW}2)${NC} [~] JackTera v3               ${YELLOW}9)${NC} [~] Tailscale             ${RED}│${NC}"
+        echo -e "${RED}│${NC}  ${YELLOW}3)${NC} [~] JackTera v4               ${YELLOW}10)${NC} [*] Cloudflare           ${RED}│${NC}"
+        echo -e "${RED}│${NC}  ${YELLOW}4)${NC} [@] Dashboard v3              ${YELLOW}11)${NC} [@] IPv4                 ${RED}│${NC}"
+        echo -e "${RED}│${NC}  ${YELLOW}5)${NC} [@] Dashboard v4              ${YELLOW}12)${NC} [>] Port Forward         ${RED}│${NC}"
+        echo -e "${RED}│${NC}  ${YELLOW}6)${NC} [$] Payment                   ${YELLOW}13)${NC} [<] Back to Main Menu    ${RED}│${NC}"
+        echo -e "${RED}│${NC}  ${YELLOW}7)${NC} [&] CtrlPanel                                         ${RED}│${NC}"
         echo -e "${RED}│${NC}                                                                        ${RED}│${NC}"
-        echo -e "${RED}└────────────────════════════════════════════════════════════════════════════┘${NC}"
+        echo -e "${RED}└────────────────────────────────────────────────────────────────────────────┘${NC}"
         echo
         echo -e "${DIM}Select an option [1-13]:${NC} "
-        echo -ne "${CYAN}➤ ${NC}"
+        echo -ne "${CYAN}> ${NC}"
         read -p "" uchoice
 
         case $uchoice in
@@ -202,7 +202,7 @@ uninstall_menu() {
             11) execute_command "Uninstall IPv4" "uninstall_ipv4.sh" ;;
             12) execute_command "Uninstall Port Forward" "uninstall_portforward.sh" ;;
             13) break ;;
-            *) echo -e "${RED}❌ Invalid choice! Please select between 1-13${NC}"; pause ;;
+            *) echo -e "${RED}[!] Invalid choice! Please select between 1-13${NC}"; pause ;;
         esac
     done
 }
@@ -211,14 +211,14 @@ uninstall_menu() {
 execute_command() {
     local name="$1"
     local script="$2"
-    echo -e "${YELLOW}🚀 Starting $name...${NC}"
+    echo -e "${YELLOW}[>] Starting $name...${NC}"
     sleep 1
     # Simulate execution - replace with actual command
     if bash <(curl -s "https://raw.githubusercontent.com/yourlink/$script") & then
         local pid=$!
         show_loading $pid "Installing $name"
     else
-        echo -e "${RED}❌ Failed to execute $name${NC}"
+        echo -e "${RED}[!] Failed to execute $name${NC}"
     fi
     pause
 }
@@ -228,20 +228,20 @@ main_menu() {
     while true; do
         banner
         echo -e "${CYAN}┌────────────────────────────────────────────────────────────────────────────┐${NC}"
-        echo -e "${CYAN}│                     ${WHITE}🏠 ${BOLD}MAIN CONTROL PANEL${NC}${CYAN}                         │${NC}"
+        echo -e "${CYAN}│                     ${WHITE}[#] ${BOLD}MAIN CONTROL PANEL${NC}${CYAN}                         │${NC}"
         echo -e "${CYAN}├────────────────────────────────────────────────────────────────────────────┤${NC}"
         echo -e "${CYAN}│${NC}                                                                        ${CYAN}│${NC}"
-        echo -e "${CYAN}│${NC}  ${BLUE}1)${NC} 📦 Panel Management                                    ${CYAN}│${NC}"
-        echo -e "${CYAN}│${NC}  ${BLUE}2)${NC} 🦅 Wings Installation                                  ${CYAN}│${NC}"
-        echo -e "${CYAN}│${NC}  ${BLUE}3)${NC} 🛠️  System Tools                                       ${CYAN}│${NC}"
-        echo -e "${CYAN}│${NC}  ${BLUE}4)${NC} 🎨 Theme Customization                                 ${CYAN}│${NC}"
-        echo -e "${CYAN}│${NC}  ${BLUE}5)${NC} 🗑️  Uninstall Manager                                  ${CYAN}│${NC}"
-        echo -e "${CYAN}│${NC}  ${BLUE}6)${NC} ❌ Exit                                                ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}  ${BLUE}1)${NC} [#] Panel Management                                  ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}  ${BLUE}2)${NC} [W] Wings Installation                                ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}  ${BLUE}3)${NC} [*] System Tools                                       ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}  ${BLUE}4)${NC} [@] Theme Customization                               ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}  ${BLUE}5)${NC} [X] Uninstall Manager                                 ${CYAN}│${NC}"
+        echo -e "${CYAN}│${NC}  ${BLUE}6)${NC} [Q] Exit                                              ${CYAN}│${NC}"
         echo -e "${CYAN}│${NC}                                                                        ${CYAN}│${NC}"
         echo -e "${CYAN}└────────────────────────────────────────────────────────────────────────────┘${NC}"
         echo
         echo -e "${DIM}Choose your action [1-6]:${NC} "
-        echo -ne "${CYAN}➤ ${NC}"
+        echo -ne "${CYAN}> ${NC}"
         read -p "" choice
 
         case $choice in
@@ -253,9 +253,9 @@ main_menu() {
             6) 
                 echo -e "${GREEN}"
                 echo -e "┌────────────────────────────────────────────────────────────────────────────┐"
-                echo -e "│                            👋 Thank You!                                   │"
-                echo -e "│                  🎯 Keandr Coding Hub                                      │"
-                echo -e "│           🔗 Visit again for more amazing tools!                          │"
+                echo -e "│                            [+] Thank You!                                  │"
+                echo -e "│                  [#] Keandr Coding Hub                                     │"
+                echo -e "│           [>] Visit again for more amazing tools!                         │"
                 echo -e "└────────────────────────────────────────────────────────────────────────────┘"
                 echo -e "${NC}"
                 exit 0 
@@ -263,8 +263,8 @@ main_menu() {
             *) 
                 echo -e "${RED}"
                 echo -e "┌────────────────────────────────────────────────────────────────────────────┐"
-                echo -e "│                          ⚠️  INVALID INPUT                                 │"
-                echo -e "│                  Please select a valid option (1-6)                        │"
+                echo -e "│                          [!] INVALID INPUT                                │"
+                echo -e "│                  Please select a valid option (1-6)                       │"
                 echo -e "└────────────────────────────────────────────────────────────────────────────┘"
                 echo -e "${NC}"
                 pause 
