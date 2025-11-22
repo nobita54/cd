@@ -80,47 +80,14 @@ install_1panel() {
     echo -e "${YELLOW}[>] Starting 1Panel Installation...${NC}"
     echo -e "${CYAN}[*] Downloading installation script...${NC}"
     
-    # Temporary file for download
-    local temp_script="/tmp/1panel_install.sh"
+    # Direct execution without prompt
+    echo -e "${CYAN}[*] Executing: curl -sSL https://resource.1panel.pro/quick_start.sh -o quick_start.sh && bash quick_start.sh${NC}"
     
-    # Download the installation script
-    if curl -sSL https://resource.1panel.pro/quick_start.sh -o "$temp_script"; then
-        echo -e "${GREEN}[+] Script downloaded successfully${NC}"
-        
-        # Check if script is valid
-        if [[ ! -s "$temp_script" ]]; then
-            echo -e "${RED}[!] Downloaded script is empty${NC}"
-            return 1
-        fi
-        
-        # Check first line of script
-        local first_line=$(head -n1 "$temp_script")
-        if [[ "$first_line" =~ ^[0-9]+::$ ]]; then
-            echo -e "${RED}[!] Invalid script format detected${NC}"
-            echo -e "${YELLOW}[*] Trying alternative installation method...${NC}"
-            rm -f "$temp_script"
-            install_1panel_alternative
-            return
-        fi
-        
-        echo -e "${CYAN}[*] Making script executable...${NC}"
-        chmod +x "$temp_script"
-        
-        echo -e "${CYAN}[*] Executing installation...${NC}"
-        show_loading "Installing 1Panel"
-        
-        # Execute the script
-        if bash "$temp_script"; then
-            echo -e "${GREEN}[+] 1Panel installed successfully${NC}"
-        else
-            echo -e "${RED}[!] 1Panel installation failed${NC}"
-        fi
-        
-        # Clean up
-        rm -f "$temp_script"
-        
+    # Execute directly without any confirmation prompt
+    if curl -sSL https://resource.1panel.pro/quick_start.sh -o quick_start.sh && bash quick_start.sh; then
+        echo -e "${GREEN}[+] 1Panel installed successfully${NC}"
     else
-        echo -e "${RED}[!] Failed to download 1Panel installation script${NC}"
+        echo -e "${RED}[!] 1Panel installation failed${NC}"
         echo -e "${YELLOW}[*] Trying alternative method...${NC}"
         install_1panel_alternative
     fi
@@ -179,17 +146,8 @@ panel_menu() {
         case $pchoice in
             1) 
                 echo -e "${YELLOW}[>] Installing 1Panel...${NC}"
-                echo -e "${CYAN}[*] Command: curl -sSL https://resource.1panel.pro/quick_start.sh -o quick_start.sh && bash quick_start.sh${NC}"
-                echo -e "${YELLOW}[!] This will install 1Panel on your system. Continue? [y/N]:${NC}"
-                
-                # Use the new read_input function for confirmation
-                confirm=$(read_input "")
-                
-                if [[ $confirm == "y" || $confirm == "Y" ]]; then
-                    install_1panel
-                else
-                    echo -e "${RED}[*] Installation cancelled${NC}"
-                fi
+                # Direct execution without any confirmation prompt
+                install_1panel
                 pause
                 ;;
             2) execute_command "Pterodactyl" "pterodactyl.sh" ;;
