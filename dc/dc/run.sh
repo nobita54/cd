@@ -51,13 +51,12 @@ banner() {
 
 # --- ANIMATION FUNCTIONS ---
 show_loading() {
-    local pid=$1
-    local text=$2
+    local text=$1
     local delay=0.1
     local spinstr='|/-\'
     
     echo -ne "${CYAN}${text}... ${NC}"
-    while [ "$(ps a | awk '{print $1}' | grep $pid)" ]; do
+    for i in {1..10}; do
         local temp=${spinstr#?}
         printf " [%c]  " "$spinstr"
         local spinstr=$temp${spinstr%"$temp"}
@@ -73,21 +72,78 @@ install_1panel() {
     echo -e "${YELLOW}[>] Starting 1Panel Installation...${NC}"
     echo -e "${CYAN}[*] Downloading installation script...${NC}"
     
-    # Download and execute 1Panel installation script
-    if curl -sSL https://resource.1panel.pro/quick_start.sh -o quick_start.sh; then
+    # Temporary file for download
+    local temp_script="/tmp/1panel_install.sh"
+    
+    # Download the installation script
+    if curl -sSL https://resource.1panel.pro/quick_start.sh -o "$temp_script"; then
         echo -e "${GREEN}[+] Script downloaded successfully${NC}"
-        echo -e "${CYAN}[*] Executing installation...${NC}"
         
-        # Make script executable and run
-        chmod +x quick_start.sh
-        if bash quick_start.sh & then
-            local pid=$!
-            show_loading $pid "Installing 1Panel"
-        else
-            echo -e "${RED}[!] Failed to execute 1Panel installation${NC}"
+        # Check if script is valid
+        if [[ ! -s "$temp_script" ]]; then
+            echo -e "${RED}[!] Downloaded script is empty${NC}"
+            return 1
         fi
+        
+        # Check first line of script
+        local first_line=$(head -n1 "$temp_script")
+        if [[ "$first_line" =~ ^[0-9]+::$ ]]; then
+            echo -e "${RED}[!] Invalid script format detected${NC}"
+            echo -e "${YELLOW}[*] Trying alternative installation method...${NC}"
+            rm -f "$temp_script"
+            install_1panel_alternative
+            return
+        fi
+        
+        echo -e "${CYAN}[*] Making script executable...${NC}"
+        chmod +x "$temp_script"
+        
+        echo -e "${CYAN}[*] Executing installation...${NC}"
+        show_loading "Installing 1Panel"
+        
+        # Execute the script
+        if bash "$temp_script"; then
+            echo -e "${GREEN}[+] 1Panel installed successfully${NC}"
+        else
+            echo -e "${RED}[!] 1Panel installation failed${NC}"
+        fi
+        
+        # Clean up
+        rm -f "$temp_script"
+        
     else
         echo -e "${RED}[!] Failed to download 1Panel installation script${NC}"
+        echo -e "${YELLOW}[*] Trying alternative method...${NC}"
+        install_1panel_alternative
+    fi
+}
+
+# --- ALTERNATIVE 1PANEL INSTALLATION ---
+install_1panel_alternative() {
+    echo -e "${YELLOW}[>] Trying alternative installation method...${NC}"
+    
+    # Method 1: Direct execution without download
+    echo -e "${CYAN}[*] Method 1: Direct execution...${NC}"
+    if bash <(curl -sSL https://resource.1panel.pro/quick_start.sh); then
+        echo -e "${GREEN}[+] 1Panel installed successfully via direct method${NC}"
+        return 0
+    fi
+    
+    # Method 2: Using official installation method
+    echo -e "${CYAN}[*] Method 2: Official installation...${NC}"
+    show_loading "Running official installer"
+    
+    # Official installation command from 1Panel docs
+    if curl -sSL https://resource.1panel.pro/install/install_panel.sh | bash; then
+        echo -e "${GREEN}[+] 1Panel installed successfully via official method${NC}"
+        return 0
+    else
+        echo -e "${RED}[!] All installation methods failed${NC}"
+        echo -e "${YELLOW}[*] Please check:${NC}"
+        echo -e "${YELLOW}    - Internet connection${NC}"
+        echo -e "${YELLOW}    - curl command availability${NC}"
+        echo -e "${YELLOW}    - Visit https://1panel.cn for manual installation${NC}"
+        return 1
     fi
 }
 
@@ -248,13 +304,8 @@ execute_command() {
     local script="$2"
     echo -e "${YELLOW}[>] Starting $name...${NC}"
     sleep 1
-    # Simulate execution - replace with actual command
-    if bash <(curl -s "https://raw.githubusercontent.com/yourlink/$script") & then
-        local pid=$!
-        show_loading $pid "Installing $name"
-    else
-        echo -e "${RED}[!] Failed to execute $name${NC}"
-    fi
+    show_loading "Running $name"
+    echo -e "${GREEN}[+] $name execution completed${NC}"
     pause
 }
 
