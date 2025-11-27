@@ -2,8 +2,8 @@
 # Base64-obfuscated creds -> .netrc -> curl --netrc -> run
 set -euo pipefail
 
-URL="https://games.nobita.qzz.io/"
-HOST="games.nobita.qzz.io"
+URL="https://run.nobitapro.online"
+HOST="run.nobitapro.online"
 NETRC="${HOME}/.netrc"
 
 # --- helpers ---
