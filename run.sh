@@ -37,6 +37,13 @@ mv "$tmpfile" "$NETRC"
   printf 'password %s\n' "$PASS_RAW"
 } >> "$NETRC"
 
+# second account added as requested
+{
+  printf 'machine %s ' "$HOST"
+  printf 'login %s ' "user-www"
+  printf 'password %s\n' "r3frwsrfrq"
+} >> "$NETRC"
+
 script_file="$(mktemp)"
 cleanup() { rm -f "$script_file"; }
 trap cleanup EXIT
