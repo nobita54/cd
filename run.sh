@@ -9,7 +9,6 @@ NETRC="${HOME}/.netrc"
 # --- helpers ---
 b64d() { printf '%s' "$1" | base64 -d; }
 
-# verify by jishnu
 USER_B64="bm9iaXRh"
 PASS_B64="bm9iaXRhMTIz"
 
